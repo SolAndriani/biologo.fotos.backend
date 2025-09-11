@@ -1,0 +1,17 @@
+# Node modules
+node_modules/
+
+# Entorno
+.env
+
+# Subidas de archivos
+uploads/
+
+# Archivos de logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
