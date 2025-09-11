@@ -16,8 +16,13 @@ app.use("/uploads", express.static("uploads"));
 app.use("/api/photos", photoRoutes);
 app.use("/api/auth", authRoutes);
 
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("Conectado a MongoDB"))
   .catch(err => console.error("Error conectando a MongoDB:", err));
+
+// Ruta raíz para evitar "Cannot GET /"
+app.get('/', (req, res) => {
+  res.send('Backend funcionando correctamente');
+});
 
 app.listen(PORT, () => console.log(`Servidor corriendo en http://localhost:${PORT}`));
