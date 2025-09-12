@@ -1,6 +1,10 @@
 import fs from "fs";
 import path from "path";
 
+// Usar la variable de entorno BACKEND_URL o localhost en desarrollo
+const backendUrl = process.env.BACKEND_URL || "http://localhost:4000";
+
+// Subir foto
 export const uploadPhoto = (req, res) => {
   try {
     if (!req.file) return res.status(400).json({ msg: "No se subió ningún archivo" });
@@ -13,7 +17,8 @@ export const uploadPhoto = (req, res) => {
     const targetPath = path.join(dir, req.file.filename);
     fs.renameSync(req.file.path, targetPath);
 
-    const url = `/uploads/${category}/${req.file.filename}`;
+    // URL absoluta para producción
+    const url = `${backendUrl}/uploads/${category}/${req.file.filename}`;
     res.status(201).json({ url, category });
   } catch (err) {
     console.error(err);
@@ -21,6 +26,7 @@ export const uploadPhoto = (req, res) => {
   }
 };
 
+// Obtener fotos por categoría
 export const getPhotosByCategory = (req, res) => {
   try {
     const category = req.params.category;
@@ -28,7 +34,8 @@ export const getPhotosByCategory = (req, res) => {
     if (!fs.existsSync(dir)) return res.json({ photos: [] });
 
     const files = fs.readdirSync(dir);
-    const urls = files.map(file => `/uploads/${category}/${file}`);
+    // URLs absolutas
+    const urls = files.map(file => `${backendUrl}/uploads/${category}/${file}`);
     res.json({ photos: urls });
   } catch (err) {
     console.error(err);
@@ -36,6 +43,7 @@ export const getPhotosByCategory = (req, res) => {
   }
 };
 
+// Eliminar foto
 export const deletePhoto = (category, filename, res) => {
   try {
     if (!category || !filename) return res.status(400).json({ msg: "Categoría y archivo requeridos" });
