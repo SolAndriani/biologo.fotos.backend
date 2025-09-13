@@ -4,8 +4,8 @@ import dotenv from "dotenv";
 import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
-import photoRoutes from "./routes/photoRoutes.js";
 import authRoutes from "./routes/auth.js";
+import photoRoutes from "./routes/photoRoutes.js";
 
 dotenv.config();
 const app = express();

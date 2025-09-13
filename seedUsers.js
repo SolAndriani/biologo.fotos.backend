@@ -9,11 +9,17 @@ async function main() {
   await mongoose.connect(process.env.MONGO_URI);
   console.log('Conectado a MongoDB');
 
+  const existingUser = await User.findOne({ username: 'Agustin' });
+  if (existingUser) {
+    console.log('Usuario ya existe');
+    await mongoose.disconnect();
+    return;
+  }
+
   const passwordHash = await bcrypt.hash('123456', 10);
 
   const user = new User({
     username: 'Agustin',
-    email: 'agustin@example.com',
     password: passwordHash
   });
 
