@@ -1,5 +1,6 @@
 import express from "express";
 import User from "../models/User.js";
+import bcrypt from "bcrypt";
 
 const router = express.Router();
 
@@ -7,10 +8,14 @@ router.post("/login", async (req, res) => {
   const { username, password } = req.body;
 
   try {
-   
-    const user = await User.findOne({ username, password });
-
+    const user = await User.findOne({ username });
     if (!user) {
+      return res.status(401).json({ message: "Usuario o contraseña incorrectos" });
+    }
+
+    // Comparar contraseña
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
       return res.status(401).json({ message: "Usuario o contraseña incorrectos" });
     }
 

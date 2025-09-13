@@ -4,13 +4,16 @@ import { uploadPhoto, getPhotosByCategory, deletePhoto } from "../controllers/ph
 
 const router = express.Router();
 
+
 router.post("/upload", upload.single("photo"), uploadPhoto);
+
+
 router.get("/category/:category", getPhotosByCategory);
 
 
 router.delete("/delete", (req, res) => {
   const { username, password, category, filename } = req.body;
-a
+
   if (username !== "Agustin" || password !== "123456") {
     return res.status(403).json({ msg: "Solo Agus puede eliminar fotos" });
   }

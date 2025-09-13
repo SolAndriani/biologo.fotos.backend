@@ -11,30 +11,30 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-// Para __dirname en ES modules
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// CORS: permitir solo desde Vercel
+
 app.use(cors({
   origin: "https://biologo-16li7z0xa-sol-andriani.vercel.app"
 }));
 
 app.use(express.json());
 
-// Servir todas las imágenes (estáticas y dinámicas) desde /uploads
+
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-// Rutas de API
+
 app.use("/api/photos", photoRoutes);
 app.use("/api/auth", authRoutes);
 
-// Ruta raíz
+
 app.get('/', (req, res) => {
   res.send('Backend funcionando correctamente');
 });
 
-// Conectar a MongoDB
+
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("Conectado a MongoDB"))
   .catch(err => console.error("Error conectando a MongoDB:", err));
