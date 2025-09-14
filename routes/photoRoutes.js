@@ -1,24 +1,49 @@
 import express from "express";
-import { upload } from "../middleware/multer.js";
-import { uploadPhoto, getPhotosByCategory, deletePhoto } from "../controllers/photoController.js";
+import multer from "multer";
+import Photo from "../models/Photo.js";
+import path from "path";
 
 const router = express.Router();
 
+// Configuración de multer
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, "uploads/"),
+  filename: (req, file, cb) => cb(null, Date.now() + "-" + file.originalname),
+});
 
-router.post("/upload", upload.single("photo"), uploadPhoto);
+const upload = multer({ storage });
 
+// Subir foto
+router.post("/upload", upload.single("photo"), async (req, res) => {
+  try {
+    if (!req.file) return res.status(400).json({ msg: "No se subió ningún archivo" });
 
-router.get("/category/:category", getPhotosByCategory);
+    // Normalizamos categoría
+    const category = req.body.category.toLowerCase().replace(/\s/g, "");
 
+    const newPhoto = new Photo({
+      url: `/uploads/${req.file.filename}`,
+      category,
+    });
 
-router.delete("/delete", (req, res) => {
-  const { username, password, category, filename } = req.body;
-
-  if (username !== "Agustin" || password !== "123456") {
-    return res.status(403).json({ msg: "Solo Agus puede eliminar fotos" });
+    await newPhoto.save();
+    res.json({ url: newPhoto.url, category: newPhoto.category });
+  } catch (err) {
+    console.error("Error subiendo la foto:", err);
+    res.status(500).json({ msg: "Error subiendo la foto" });
   }
+});
 
-  deletePhoto(category, filename, res);
+// Obtener fotos por categoría
+router.get("/category/:category", async (req, res) => {
+  try {
+    const category = req.params.category.toLowerCase().replace(/\s/g, "");
+    const photos = await Photo.find({ category });
+    res.json(photos);
+  } catch (err) {
+    console.error("Error cargando fotos:", err);
+    res.status(500).json({ msg: "Error cargando fotos" });
+  }
 });
 
 export default router;

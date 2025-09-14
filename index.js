@@ -4,7 +4,9 @@ import dotenv from "dotenv";
 import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
+
 import authRoutes from "./routes/auth.js";
+import photoRoutes from "./routes/photoRoutes.js"; // tu ruta de fotos
 
 dotenv.config();
 const app = express();
@@ -13,32 +15,34 @@ const PORT = process.env.PORT || 4000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// 👉 Configuración CORS
 app.use(cors({
   origin: [
-    "https://biologo-frontend-git-main-sol-andriani.vercel.app",
-    "http://localhost:3000"
+    "https://biologo-frontend-git-main-sol-andriani.vercel.app", // tu frontend en Vercel
+    "http://localhost:3000" // para desarrollo local
   ],
   credentials: true
 }));
 
-
-app.use(express.json());
-
-// Servir imágenes
+// 👉 Middlewares
+app.use(express.json()); 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-// Rutas
+// 👉 Rutas
 app.use("/api/auth", authRoutes);
+app.use("/api/photos", photoRoutes);
 
-// Ruta raíz
 app.get("/", (req, res) => {
-  res.send("Backend funcionando correctamente");
+  res.send("Backend funcionando correctamente ✅");
 });
 
-// Conectar a MongoDB
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log("Conectado a MongoDB ✅"))
-  .catch(err => console.error("Error conectando a MongoDB:", err));
+// 👉 Conexión a Mongo
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+.then(() => console.log("Conectado a MongoDB ✅"))
+.catch(err => console.error("Error conectando a MongoDB:", err));
 
-// Servidor
+// 👉 Levantar servidor
 app.listen(PORT, () => console.log(`Servidor corriendo en puerto ${PORT}`));
