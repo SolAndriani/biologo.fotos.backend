@@ -1,47 +1,52 @@
 import express from "express";
 import multer from "multer";
-import Photo from "../models/Photo.js";
 import path from "path";
+import fs from "fs";
+import Photo from "../models/Photo.js"; // tu modelo de Mongoose
 
 const router = express.Router();
 
-// Configuración de multer
+// Configuración de almacenamiento con creación de carpetas automáticas
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, "uploads/"),
-  filename: (req, file, cb) => cb(null, Date.now() + "-" + file.originalname),
+  destination: (req, file, cb) => {
+    const category = req.body.category;
+    const uploadPath = path.join("uploads", category);
+
+    if (!fs.existsSync(uploadPath)) fs.mkdirSync(uploadPath, { recursive: true });
+
+    cb(null, uploadPath);
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname));
+  }
 });
 
 const upload = multer({ storage });
 
-// Subir foto
+// POST subir foto
 router.post("/upload", upload.single("photo"), async (req, res) => {
+  if (!req.file) return res.status(400).json({ msg: "No se subió ningún archivo" });
+
   try {
-    if (!req.file) return res.status(400).json({ msg: "No se subió ningún archivo" });
-
-    // Normalizamos categoría
-    const category = req.body.category.toLowerCase().replace(/\s/g, "");
-
-    const newPhoto = new Photo({
-      url: `/uploads/${req.file.filename}`,
-      category,
+    const newPhoto = await Photo.create({
+      url: `/uploads/${req.body.category}/${req.file.filename}`,
+      category: req.body.category
     });
-
-    await newPhoto.save();
-    res.json({ url: newPhoto.url, category: newPhoto.category });
+    res.json(newPhoto);
   } catch (err) {
-    console.error("Error subiendo la foto:", err);
-    res.status(500).json({ msg: "Error subiendo la foto" });
+    console.error(err);
+    res.status(500).json({ msg: "Error guardando foto en la DB" });
   }
 });
 
-// Obtener fotos por categoría
+// GET fotos por categoría
 router.get("/category/:category", async (req, res) => {
   try {
-    const category = req.params.category.toLowerCase().replace(/\s/g, "");
-    const photos = await Photo.find({ category });
-    res.json(photos);
+    const photos = await Photo.find({ category: req.params.category });
+    // Devuelve array de urls
+    res.json({ photos: photos.map(p => p.url) });
   } catch (err) {
-    console.error("Error cargando fotos:", err);
+    console.error(err);
     res.status(500).json({ msg: "Error cargando fotos" });
   }
 });
