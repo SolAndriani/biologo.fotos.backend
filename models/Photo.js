@@ -1,17 +1,11 @@
-import express from "express";
-import Photo from "../models/Photo.js";
+import mongoose from "mongoose";
 
-const router = express.Router();
-
-// Obtener fotos por categoría
-router.get("/category/:category", async (req, res) => {
-  try {
-    const category = req.params.category.toLowerCase();
-    const photos = await Photo.find({ category }).sort({ _id: -1 }); // más recientes primero
-    res.json(photos); // ahora devuelve directamente un array
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+const photoSchema = new mongoose.Schema({
+  imageUrl: String,
+  category: String,
+  public_id: String,
+  createdAt: { type: Date, default: Date.now }
 });
 
-export default router;
+const Photo = mongoose.model("Photo", photoSchema);
+export default Photo;
