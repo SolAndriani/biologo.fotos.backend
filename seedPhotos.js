@@ -1,10 +1,10 @@
+// seedPhotos.js
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import Photo from "./models/Photo.js";
 
 dotenv.config();
 
-// Conexión a MongoDB
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log("Conectado a MongoDB ✅"))
@@ -12,17 +12,18 @@ mongoose
 
 // Array de fotos por categoría
 const photos = [
-  // ===== Foto de perfil de Agustín =====
-  { category: "perfil", url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028577/Agus_u9ctxp.jpg" },
-
-  // ===== Fotos del header / carrusel =====
-  { category: "header", url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028551/vuelo_gmgrl0.jpg" },
-  { category: "header", url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028549/Vaca_vdfrna.jpg" },
-  { category: "header", url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028547/Tero_p4xjxm.jpg" },
-  { category: "header", url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028545/pinguino_fns6z8.jpg" },
-  { category: "header", url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028543/pavo_a8trkr.jpg" },
-  { category: "header", url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028541/paisaje_ewt9hm.jpg" },
-  { category: "header", url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028539/Aguila_uief89.jpg" },
+  // ===== Fotos del header =====
+{ url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028551/vuelo_gmgrl0.jpg", category: "header" },
+{ url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028549/Vaca_vdfrna.jpg", category: "header" },
+{ url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028547/Tero_p4xjxm.jpg", category: "header" },
+{ url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028545/pinguino_fns6z8.jpg", category: "header" },
+{ url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028543/pavo_a8trkr.jpg", category: "header" },
+{ url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028541/paisaje_ewt9hm.jpg", category: "header" },
+{ url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028539/Aguila_uief89.jpg", category: "header" },
+  // ===== Perfil =====
+{ 
+  url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028577/Agus_u9ctxp.jpg",  
+},
 
   // ===== Animales =====
   { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758027815/animal23_fuzmxq.jpg", category: "animales" },
@@ -52,21 +53,60 @@ const photos = [
 
   // ===== Blanco y Negro =====
   { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028536/foto27_ifaycj.jpg", category: "blackandwhite" },
-  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028483/foto1_sqegkd.jpg", category: "blackandwhite" }, // resumido por ejemplo
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028534/foto26_enufdk.jpg", category: "blackandwhite" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028532/foto25_hyzkwd.jpg", category: "blackandwhite" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028530/foto24_fzmt6v.jpg", category: "blackandwhite" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028529/foto23_tzfdfz.jpg", category: "blackandwhite" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028528/foto22_an5b6n.jpg", category: "blackandwhite" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028524/foto21_fg1wzx.jpg", category: "blackandwhite" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028523/foto20_yrry4s.jpg", category: "blackandwhite" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028520/foto19_lspetc.jpg", category: "blackandwhite" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028520/foto18_ebds15.jpg", category: "blackandwhite" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028518/foto17_xxds1o.jpg", category: "blackandwhite" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028515/foto16_gtkoaa.jpg", category: "blackandwhite" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028512/foto15_m72zyw.jpg", category: "blackandwhite" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028509/foto14_jgb7kt.jpg", category: "blackandwhite" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028507/foto13_jfd2ba.jpg", category: "blackandwhite" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028505/foto12_e4pyop.jpg", category: "blackandwhite" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028499/foto9_bgb6ka.jpg", category: "blackandwhite" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028497/foto8_wu5dzp.jpg", category: "blackandwhite" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028495/foto7_eixfhy.jpg", category: "blackandwhite" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028493/foto6_a4uyda.jpg", category: "blackandwhite" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028491/foto5_ss9sop.jpg", category: "blackandwhite" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028490/foto4_wjamwl.jpg", category: "blackandwhite" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028487/foto3_nfosqn.jpg", category: "blackandwhite" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028485/foto2_lfjygs.jpg", category: "blackandwhite" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028483/foto1_sqegkd.jpg", category: "blackandwhite" },
 
   // ===== Paisajes =====
   { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028410/paisaje13_jcsjcv.jpg", category: "paisajes" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028408/paisaje12_rmctpr.jpg", category: "paisajes" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028406/paisaje11_u4bsqx.jpg", category: "paisajes" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028405/paisaje10_mz0t35.jpg", category: "paisajes" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028402/paisaje9_lt3aih.jpg", category: "paisajes" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028400/paisaje8_tgqdvx.jpg", category: "paisajes" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028398/paisaje7_c7hbne.jpg", category: "paisajes" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028396/paisaje6_wixzom.jpg", category: "paisajes" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028394/paisaje5_oyvrax.jpg", category: "paisajes" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028394/paisaje4_migxkv.jpg", category: "paisajes" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028391/paisaje3_fxxpxw.jpg", category: "paisajes" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028391/paisaje2_darvil.jpg", category: "paisajes" },
   { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028389/paisaje1_xud8rb.jpg", category: "paisajes" },
 ];
 
-// Función para insertar las fotos en Mongo
+// Agregar public_id a cada foto
+const photosWithId = photos.map(p => ({
+  ...p,
+  public_id: p.url.split("/upload/")[1].replace(/\.[a-z]+$/, "")
+}));
+
+// Insertar en MongoDB
 async function seedPhotos() {
   try {
-    await Photo.deleteMany({});
-    await Photo.insertMany(photos);
-    console.log(`¡Todas las fotos se guardaron ✅! Total: ${photos.length}`);
+    await Photo.insertMany(photosWithId);
+    console.log(`¡Todas las fotos se guardaron ✅! Total: ${photosWithId.length}`);
   } catch (err) {
-    console.error("Error al insertar fotos:", err);
+    console.error(err);
   } finally {
     mongoose.disconnect();
   }
