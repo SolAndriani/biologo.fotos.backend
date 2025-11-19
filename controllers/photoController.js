@@ -26,3 +26,15 @@ export const uploadPhoto = async (req, res) => {
     res.status(500).json({ msg: "Error en el servidor" });
   }
 };
+
+export const getPhotosByCategory = async (req, res) => {
+  try {
+    const { category } = req.params;
+    const photos = await Photo.find({ category });
+    res.json(photos);
+  } catch (error) {
+    console.error("Error al obtener fotos:", error);
+    res.status(500).json({ error: "Error al obtener fotos" });
+  }
+};
+
