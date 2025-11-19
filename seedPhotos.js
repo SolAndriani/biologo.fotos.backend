@@ -22,10 +22,26 @@ const photos = [
 { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028539/Aguila_uief89.jpg", category: "header" },
   // ===== Perfil =====
 { 
-  url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028577/Agus_u9ctxp.jpg",  
+  url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028577/Agus_u9ctxp.jpg",
+  category: "perfil"
 },
 
+
   // ===== Animales =====
+
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1763560797/pato3_xqx7ff.jpg", category: "animales"},
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1763560769/pato2_wamx0n.jpg", category: "animales"},
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1763560766/pato_ut7kys.jpg", category: "animales"},
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1763560762/pajaro_carpintero_e4aykv.jpg", category: "animales"},
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1763560805/pato4_pzvhey.jpg", category: "animales"},
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1763560727/f3f3e1db-1bf9-4ac8-9ee3-f608027f5528_yuegeo.jpg", category: "animales"},
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1763560758/pajarito_o0lnee.jpg", category: "animales"},
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1763560762/pajaro_carpintero_e4aykv.jpg", category: "animales"},
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1763560731/mapache_fdhmlz.jpg", category: "animales"},
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1763560740/mariposa_fbrc2g.jpg", category: "animales"},
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1763560722/colibri_ridy4w.jpg", category: "animales"},
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1763560715/castor_cailab.jpg", category: "animales" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1763560685/ardilla_gzxtdy.jpg", category: "animales"},
   { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758027815/animal23_fuzmxq.jpg", category: "animales" },
   { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758027815/animal24_bgj5zh.jpg", category: "animales" },
   { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758027815/animal19_bonzoj.jpg", category: "animales" },
@@ -79,6 +95,8 @@ const photos = [
   { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028483/foto1_sqegkd.jpg", category: "blackandwhite" },
 
   // ===== Paisajes =====
+
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1763560817/bosque_bah7sx.jpg", category: "paisajes" },
   { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028410/paisaje13_jcsjcv.jpg", category: "paisajes" },
   { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028408/paisaje12_rmctpr.jpg", category: "paisajes" },
   { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028406/paisaje11_u4bsqx.jpg", category: "paisajes" },

@@ -1,21 +1,28 @@
-export const getPhotosByCategory = async (req, res) => {
-  try {
-    const category = req.params.category.toLowerCase();
-    const photos = await Photo.find({ category });
+import Photo from "../models/Photo.js";
 
-    
-    if (!photos || photos.length === 0) {
-      console.log(`No se encontraron fotos para la categoría: ${category}`);
-      return res.json({ photos: [] });
+export const uploadPhoto = async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ msg: "No se subió ninguna imagen" });
     }
 
+    const { title, category } = req.body;
 
-    const photoUrls = photos
-      .filter(p => p.url) 
+    if (!category) {
+      return res.status(400).json({ msg: "Debe seleccionar una categoría" });
+    }
 
-    res.json({ photos: photoUrls });
+    const newPhoto = new Photo({
+      title: title || "Sin título",
+      category,
+      url: `/uploads/${req.file.filename}`,
+    });
+
+    await newPhoto.save();
+
+    res.json({ msg: "Foto subida correctamente", photo: newPhoto });
   } catch (err) {
-    console.error("Error en getPhotosByCategory:", err);
-    res.status(500).json({ msg: "Error obteniendo fotos", error: err.message });
+    console.error("Error al subir foto:", err);
+    res.status(500).json({ msg: "Error en el servidor" });
   }
 };

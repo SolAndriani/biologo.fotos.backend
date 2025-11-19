@@ -3,9 +3,6 @@ import mongoose from "mongoose";
 const photoSchema = new mongoose.Schema({
   url: { type: String, required: true },
   category: { type: String, required: true },
-  public_id: { type: String, required: true },
-}, { timestamps: true });
+});
 
-const Photo = mongoose.model("Photo", photoSchema);
-
-export default Photo;
+export default mongoose.model("Photo", photoSchema);
