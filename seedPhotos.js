@@ -1,16 +1,16 @@
-// seedPhotos.js
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import Photo from "./models/Photo.js";
 
 dotenv.config();
 
+// ------------------
+// 1) Conectar a MongoDB
+// ------------------
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log("Conectado a MongoDB ✅"))
-  .catch((err) => console.error(err));
-
-// Array de fotos por categoría
+  .catch((err) => console.error("Error al conectar MongoDB ❌", err));
 const photos = [
   // ===== Fotos del header =====
 { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028551/vuelo_gmgrl0.jpg", category: "header" },
@@ -29,21 +29,21 @@ const photos = [
 
   // ===== Animales =====
 
-  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1763560797/pato3_xqx7ff.jpg", category: "animales"},
-  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1763560769/pato2_wamx0n.jpg", category: "animales"},
-  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1763560766/pato_ut7kys.jpg", category: "animales"},
-  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1763560762/pajaro_carpintero_e4aykv.jpg", category: "animales"},
-  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1763560805/pato4_pzvhey.jpg", category: "animales"},
-  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1763560727/f3f3e1db-1bf9-4ac8-9ee3-f608027f5528_yuegeo.jpg", category: "animales"},
-  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1763560758/pajarito_o0lnee.jpg", category: "animales"},
-  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1763560762/pajaro_carpintero_e4aykv.jpg", category: "animales"},
-  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1763560731/mapache_fdhmlz.jpg", category: "animales"},
-  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1763560740/mariposa_fbrc2g.jpg", category: "animales"},
-  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1763560722/colibri_ridy4w.jpg", category: "animales"},
-  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1763560715/castor_cailab.jpg", category: "animales" },
-  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1763560685/ardilla_gzxtdy.jpg", category: "animales"},
-  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758027815/animal23_fuzmxq.jpg", category: "animales" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1763642997/animal39_tjsftv.jpg", category: "animales" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1763642996/animal36_gopvgg.jpg", category: "animales" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1763642996/animal37_jnnbd9.jpg", category: "animales" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1763642995/animal34_lgiuug.jpg", category: "animales" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1763642995/animal35_xyymti.jpg", category: "animales" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1763642994/animal33_hlcaz1.jpg", category: "animales" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1763642982/animal31_hbsssb.jpg", category: "animales" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1763642979/animal30_ef7lrm.jpg", category: "animales" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1763642975/animal29_cbk88n.jpg", category: "animales" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1763642971/animal28_vizjse.jpg", category: "animales" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1763642968/animal27_k8usgr.jpg", category: "animales" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1763642966/animal26_bp6w2d.jpg", category: "animales" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1763642958/animal25_oyvcai.jpg", category: "animales" },
   { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758027815/animal24_bgj5zh.jpg", category: "animales" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758027815/animal23_fuzmxq.jpg", category: "animales" },
   { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758027815/animal19_bonzoj.jpg", category: "animales" },
   { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758027814/animal22_pigev1.jpg", category: "animales" },
   { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758027814/animal21_km464x.jpg", category: "animales" },
@@ -96,7 +96,7 @@ const photos = [
 
   // ===== Paisajes =====
 
-  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1763560817/bosque_bah7sx.jpg", category: "paisajes" },
+  { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1763565113/paisaje14_yongmu.jpg", category: "paisajes" },
   { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028410/paisaje13_jcsjcv.jpg", category: "paisajes" },
   { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028408/paisaje12_rmctpr.jpg", category: "paisajes" },
   { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028406/paisaje11_u4bsqx.jpg", category: "paisajes" },
@@ -111,20 +111,29 @@ const photos = [
   { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028391/paisaje2_darvil.jpg", category: "paisajes" },
   { url: "https://res.cloudinary.com/dmixd7wpb/image/upload/v1758028389/paisaje1_xud8rb.jpg", category: "paisajes" },
 ];
-
-// Agregar public_id a cada foto
-const photosWithId = photos.map(p => ({
-  ...p,
-  public_id: p.url.split("/upload/")[1].replace(/\.[a-z]+$/, "")
-}));
-
-// Insertar en MongoDB
 async function seedPhotos() {
   try {
-    await Photo.insertMany(photosWithId);
-    console.log(`¡Todas las fotos se guardaron ✅! Total: ${photosWithId.length}`);
+    console.log(" Procesando fotos...");
+
+    let added = 0;
+
+    for (const photo of photos) {
+      const exists = await Photo.findOne({ url: photo.url });
+
+      if (!exists) {
+        await Photo.create(photo);
+        added++;
+        console.log("Foto agregada:", photo.url);
+      } else {
+        console.log("✔ Ya existía:", photo.url);
+      }
+    }
+
+    console.log(`\nProceso terminado. Fotos nuevas agregadas: ${added}`);
+
   } catch (err) {
-    console.error(err);
+    console.error("Error:", err);
+
   } finally {
     mongoose.disconnect();
   }

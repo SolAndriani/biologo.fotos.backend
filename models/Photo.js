@@ -1,8 +1,13 @@
 import mongoose from "mongoose";
 
-const photoSchema = new mongoose.Schema({
-  url: { type: String, required: true },
-  category: { type: String, required: true },
-});
+const PhotoSchema = new mongoose.Schema(
+  {
+    title: { type: String, required: false },
+    category: { type: String, required: true },
+    url: { type: String, required: true }, // URL de Cloudinary
+  },
+  { timestamps: true }
+);
 
-export default mongoose.model("Photo", photoSchema);
+const Photo = mongoose.model("Photo", PhotoSchema);
+export default Photo;
